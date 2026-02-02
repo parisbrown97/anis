@@ -16,8 +16,9 @@
       --overlay: rgba(0,0,0,0.62);
       --shadow: 0 10px 30px rgba(0,0,0,0.5);
       --chip: rgba(53,94,59,0.18);
-      --ok: rgba(16,185,129,0.18);
     }
+
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -52,7 +53,7 @@
       position: relative;
       z-index: 2;
       width: 100%;
-      max-width: 860px;
+      max-width: 960px;
     }
 
     .card {
@@ -78,15 +79,7 @@
       line-height: 1.35;
     }
 
-    iframe { margin-top: 10px; }
-
-    .spotify-note {
-      font-size: 13px;
-      color: rgba(156,163,175,0.95);
-      margin-top: 6px;
-    }
-
-    /* Widget shell */
+    /* Widgets */
     .widget{
       border: 1px solid var(--border);
       border-radius: 16px;
@@ -112,6 +105,60 @@
       background: var(--chip);
       border: 1px solid var(--border);
       white-space: nowrap;
+    }
+
+    .note{
+      margin-top: 8px;
+      font-size: 12px;
+      color: rgba(156,163,175,0.95);
+    }
+
+    .bigline{
+      font-size: 18px;
+      font-weight: 650;
+      line-height: 1.25;
+    }
+
+    .smallline{
+      font-size: 13px;
+      color: rgba(156,163,175,0.95);
+      margin-top: 4px;
+    }
+
+    /* Spotify + Kiss row */
+    .row-spotify{
+      display: grid;
+      grid-template-columns: 2fr 1fr; /* 2/3 and 1/3 */
+      gap: 12px;
+      margin-top: 6px;
+    }
+    @media (max-width: 860px){
+      .row-spotify{ grid-template-columns: 1fr; }
+    }
+
+    iframe { width: 100%; }
+
+    .btnrow{
+      display:flex;
+      gap:10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .action{
+      font-size: 14px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      background: rgba(17,24,39,0.45);
+      color: var(--text);
+    }
+
+    .action.primary{
+      background: var(--accent);
+      border: none;
+      font-weight: 650;
     }
 
     /* Time + Weather */
@@ -154,13 +201,7 @@
       color: rgba(156,163,175,0.95);
     }
 
-    .note{
-      margin-top: 8px;
-      font-size: 12px;
-      color: rgba(156,163,175,0.95);
-    }
-
-    /* 3-up row */
+    /* Daily quote/intention/nudge row */
     .grid3{
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -169,18 +210,6 @@
     }
     @media (max-width: 860px){
       .grid3{ grid-template-columns: 1fr; }
-    }
-
-    .bigline{
-      font-size: 18px;
-      font-weight: 650;
-      line-height: 1.25;
-    }
-
-    .smallline{
-      font-size: 13px;
-      color: rgba(156,163,175,0.95);
-      margin-top: 4px;
     }
 
     /* Breathing */
@@ -200,88 +229,51 @@
       transition: width 200ms linear;
     }
 
-    .btnrow{
-      display:flex;
-      gap:10px;
-      flex-wrap: wrap;
+    /* Buttons widget (Open when...) */
+    .open-when-grid{
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
       margin-top: 10px;
     }
+    @media (max-width: 760px){
+      .open-when-grid{ grid-template-columns: 1fr; }
+    }
 
-    .action{
-      font-size: 14px;
-      padding: 10px 12px;
-      border-radius: 12px;
+    .openbtn{
+      text-align: left;
+      width: 100%;
+      padding: 12px 12px;
+      border-radius: 14px;
       border: 1px solid var(--border);
+      background: rgba(17,24,39,0.35);
+      color: rgba(249,250,251,0.92);
       cursor: pointer;
-      background: rgba(17,24,39,0.45);
-      color: var(--text);
+      font-size: 14px;
+      line-height: 1.25;
+    }
+    .openbtn:hover{ background: rgba(17,24,39,0.55); }
+
+    .open-note{
+      margin-top: 12px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px;
+      background: rgba(17,24,39,0.35);
+      min-height: 74px;
     }
 
-    .action.primary{
-      background: var(--accent);
-      border: none;
-      font-weight: 650;
-    }
-
-    /* Ravenclaw logic + Random facts + Recipes */
-    .grid3b{
+    /* Random facts + Recipes row */
+    .grid2{
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: 1fr 1fr;
       gap: 12px;
       margin-top: 16px;
     }
-    @media (max-width: 980px){
-      .grid3b{ grid-template-columns: 1fr; }
+    @media (max-width: 860px){
+      .grid2{ grid-template-columns: 1fr; }
     }
 
-    .logic{
-      display:none;
-      margin-top: 10px;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      overflow: hidden;
-      background: rgba(17,24,39,0.35);
-    }
-
-    .logic.show{ display:block; }
-
-    .logic table{
-      width:100%;
-      border-collapse: collapse;
-      font-size: 13px;
-    }
-
-    .logic th, .logic td{
-      padding: 10px 12px;
-      border-bottom: 1px solid var(--border);
-      vertical-align: top;
-    }
-
-    .logic th{
-      color: var(--muted);
-      background: rgba(17,24,39,0.35);
-      text-align: left;
-    }
-
-    .logic td:last-child{
-      background: var(--ok);
-    }
-
-    .links a{
-      color: rgba(249,250,251,0.88);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(249,250,251,0.18);
-    }
-    .links a:hover{
-      border-bottom-color: rgba(249,250,251,0.55);
-    }
-
-    .linklist{
-      display:flex;
-      flex-wrap: wrap;
-      gap:10px;
-      margin-top: 10px;
-    }
     .linkpill{
       display:inline-flex;
       align-items:center;
@@ -294,6 +286,9 @@
       color: rgba(249,250,251,0.88);
       font-size: 13px;
       white-space: nowrap;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .linkpill:hover{ background: rgba(17,24,39,0.55); }
 
@@ -328,17 +323,47 @@
       <h1>Hey Anis.</h1>
       <p>This is here for whenever things feel heavy — no expectations.</p>
 
-      <!-- Spotify (your playlist) -->
-      <iframe
-        style="border-radius:12px"
-        src="https://open.spotify.com/embed/playlist/37i9dQZF1E4qQ00I1Jm1ay?utm_source=generator&theme=0"
-        width="100%"
-        height="90"
-        frameborder="0"
-        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-        loading="lazy">
-      </iframe>
-      <div class="spotify-note">Something steady for long days.</div>
+      <!-- Spotify (2/3) + Kiss (1/3) -->
+      <div class="row-spotify">
+        <div class="widget" style="margin-top:0;">
+          <div class="widget-title">
+            <span>Playlist</span>
+            <span class="chip">for long days</span>
+          </div>
+
+          <iframe
+            style="border-radius:12px"
+            src="https://open.spotify.com/embed/playlist/37i9dQZF1E4qQ00I1Jm1ay?utm_source=generator&theme=0"
+            height="120"
+            frameborder="0"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy">
+          </iframe>
+
+          <div class="smallline">Something steady.</div>
+        </div>
+
+        <div class="widget" style="margin-top:0;">
+          <div class="widget-title">
+            <span>Press here for a kiss</span>
+            <span class="chip">audio</span>
+          </div>
+
+          <div class="bigline" style="font-size:16px; font-weight:600;">
+            If you need a tiny reset.
+          </div>
+
+          <div class="btnrow">
+            <button class="action primary" id="kissBtn">💋</button>
+            <button class="action" id="kissStopBtn">Stop</button>
+          </div>
+
+          <div class="smallline" id="kissNote">Tip: upload your kiss audio files into the repo, then list them in the code.</div>
+
+          <!-- Hidden audio player (plays on button click) -->
+          <audio id="kissAudio" preload="auto"></audio>
+        </div>
+      </div>
 
       <!-- Time + Weather -->
       <div class="widget">
@@ -409,35 +434,30 @@
         <div class="smallline">Inhale 4 • Hold 4 • Exhale 6 (repeat x3)</div>
       </div>
 
-      <!-- Give me one thing + Ravenclaw logic + Random facts + Recipes -->
-      <div class="grid3b">
-        <!-- Encourage + Ravenclaw logic -->
-        <div class="widget" style="margin-top:0;">
-          <div class="widget-title">
-            <span>Support</span>
-            <span class="chip">Low effort</span>
-          </div>
-
-          <div class="btnrow">
-            <button class="action primary" id="encourageBtn">Give me one thing</button>
-            <button class="action" id="toggleLogicBtn">Ravenclaw logic</button>
-          </div>
-
-          <div class="bigline" id="encourageLine" style="margin-top:12px; min-height:46px;"></div>
-          <div class="smallline" id="signatureLine"></div>
-          <div class="smallline" id="easterLine"></div>
-
-          <div class="logic" id="logicBox">
-            <table>
-              <tr><th style="width:40%;">Claim</th><th>Evidence</th></tr>
-              <tr><td>You belong here.</td><td>Acceptance + preparation + performance history.</td></tr>
-              <tr><td>Bad moments ≠ bad doctor.</td><td>Signal ≠ identity. One datapoint doesn’t overturn the trend.</td></tr>
-              <tr><td>Recovery improves output.</td><td>Rest improves judgment, memory consolidation, and precision.</td></tr>
-              <tr><td>Do the next right thing.</td><td>Small actions compound. Focus on controllables.</td></tr>
-            </table>
-          </div>
+      <!-- Open-when buttons (replaces Support section) -->
+      <div class="widget">
+        <div class="widget-title">
+          <span>Open when…</span>
+          <span class="chip">no pressure</span>
         </div>
 
+        <div class="open-when-grid">
+          <button class="openbtn" data-key="anxious">…you’re anxious</button>
+          <button class="openbtn" data-key="rough">…you had a rough case</button>
+          <button class="openbtn" data-key="tired">…you’re exhausted</button>
+          <button class="openbtn" data-key="cantSleep">…you can’t sleep</button>
+          <button class="openbtn" data-key="missMe">…you miss me</button>
+          <button class="openbtn" data-key="win">…you had a good day</button>
+        </div>
+
+        <div class="open-note">
+          <div class="bigline" id="openTitle" style="font-size:16px;">Pick a button.</div>
+          <div class="smallline" id="openText">I’ll be right here.</div>
+        </div>
+      </div>
+
+      <!-- Random facts + Random recipe -->
+      <div class="grid2">
         <!-- Random facts -->
         <div class="widget" style="margin-top:0;">
           <div class="widget-title">
@@ -454,29 +474,29 @@
           <div class="smallline">Lightweight on purpose.</div>
         </div>
 
-        <!-- Recipes -->
-        <div class="widget links" style="margin-top:0;">
+        <!-- Recipe please (random from your list of URLs) -->
+        <div class="widget" style="margin-top:0;">
           <div class="widget-title">
             <span>Recipe please</span>
-            <span class="chip">Open a site</span>
+            <span class="chip">random link</span>
           </div>
 
           <div class="bigline" style="font-size:16px; font-weight:600;">
-            Pick a vibe: fast, healthy, or comfort.
+            Need food? I got you.
           </div>
 
-          <div class="linklist">
-            <a class="linkpill" href="https://www.budgetbytes.com/" target="_blank" rel="noopener noreferrer">Budget Bytes</a>
-            <a class="linkpill" href="https://www.seriouseats.com/" target="_blank" rel="noopener noreferrer">Serious Eats</a>
-            <a class="linkpill" href="https://www.allrecipes.com/" target="_blank" rel="noopener noreferrer">Allrecipes</a>
-            <a class="linkpill" href="https://www.bonappetit.com/" target="_blank" rel="noopener noreferrer">Bon Appétit</a>
-            <a class="linkpill" href="https://www.nytimes.com/cooking" target="_blank" rel="noopener noreferrer">NYT Cooking</a>
-            <a class="linkpill" href="https://www.recipetineats.com/" target="_blank" rel="noopener noreferrer">RecipeTin Eats</a>
+          <div class="btnrow">
+            <button class="action primary" id="recipeBtn">Pick a recipe</button>
+            <a class="action" id="recipeOpen" href="#" target="_blank" rel="noopener noreferrer" style="text-decoration:none; display:none;">
+              Open
+            </a>
           </div>
 
-          <div class="smallline" style="margin-top:10px;">
-            Tip: if you want, I can add a “search box” that opens results for whatever you type.
-          </div>
+          <div class="note" id="recipeLabel">Add your recipe URLs in the code and this will randomize them.</div>
+
+          <a class="linkpill" id="recipeLink" href="#" target="_blank" rel="noopener noreferrer" style="display:none;">
+            —
+          </a>
         </div>
       </div>
 
@@ -529,65 +549,6 @@
     document.getElementById("dailyQuote").textContent = pickDaily(QUOTES, 1);
     document.getElementById("dailyIntention").textContent = pickDaily(INTENTIONS, 2);
     document.getElementById("habitNudge").textContent = pickDaily(NUDGES, 3);
-
-    /* -------------------------
-       Encouragement
-    ------------------------- */
-    const encouragement = [
-      "You earned this — completely.",
-      "You belong exactly where you are.",
-      "If today is heavy, make it smaller: next task only.",
-      "Quiet confidence goes a long way.",
-      "Rest is part of staying sharp.",
-      "You’re learning — that’s the point.",
-      "Do the next right thing. That’s enough.",
-      "Small wins still count."
-    ];
-
-    const easterEggs = [
-      "",
-      "",
-      "Hydration matters. (You know this.)",
-      "Sharp mind. Steady hands.",
-      "Ravenclaws think before they act."
-    ];
-
-    function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
-
-    document.getElementById("encourageBtn").onclick = () => {
-      document.getElementById("encourageLine").textContent = pick(encouragement);
-      document.getElementById("signatureLine").textContent = "— someone in your corner";
-      document.getElementById("easterLine").textContent = pick(easterEggs);
-    };
-
-    /* -------------------------
-       Ravenclaw logic toggle
-    ------------------------- */
-    document.getElementById("toggleLogicBtn").onclick = () => {
-      document.getElementById("logicBox").classList.toggle("show");
-    };
-
-    /* -------------------------
-       Random facts
-    ------------------------- */
-    const FACTS = [
-      "Honey never spoils — sealed jars have been found edible thousands of years later.",
-      "Octopuses have three hearts and blue blood.",
-      "A day on Venus is longer than a year on Venus.",
-      "Bananas are berries; strawberries aren’t (botanically speaking).",
-      "Your brain uses roughly 20% of your body’s energy.",
-      "Lightning is ~5× hotter than the surface of the sun.",
-      "There are more trees on Earth than stars in the Milky Way (estimates vary, but it’s close).",
-      "A group of flamingos is called a ‘flamboyance.’",
-      "Some turtles can breathe through their butts (cloacal respiration).",
-      "The Eiffel Tower can grow ~6 inches in summer due to thermal expansion."
-    ];
-
-    document.getElementById("factBtn").onclick = () => {
-      document.getElementById("randomFact").textContent = pick(FACTS);
-      document.getElementById("factTag").textContent = "New";
-      setTimeout(() => document.getElementById("factTag").textContent = "Tap", 2000);
-    };
 
     /* -------------------------
        Time (LA vs Durham)
@@ -704,6 +665,157 @@
 
     document.getElementById("breathStart").onclick = startB;
     document.getElementById("breathStop").onclick = stopB;
+
+    /* -------------------------
+       Open-when notes (buttons)
+       Edit these to sound exactly like you.
+    ------------------------- */
+    const OPEN_WHEN = {
+      anxious: {
+        title: "If you’re anxious",
+        text: "Just breathe with me for one minute.\nYou don’t have to solve everything right now.\nPick the next smallest step. That’s enough."
+      },
+      rough: {
+        title: "If you had a rough case",
+        text: "I’m sorry. I know that sits heavy.\nYou’re still a good doctor.\nTake a breath, drink water, and let your nervous system come down."
+      },
+      tired: {
+        title: "If you’re exhausted",
+        text: "You’ve carried a lot.\nDo the bare minimum for yourself tonight.\nFood + water + sleep — in any order."
+      },
+      cantSleep: {
+        title: "If you can’t sleep",
+        text: "No spiraling.\nOne slow inhale, one slower exhale.\nTomorrow can wait. Right now is just quiet."
+      },
+      missMe: {
+        title: "If you miss me",
+        text: "I miss you too.\nI’m proud of you — even from far away.\nPress the kiss button if you want something small and real."
+      },
+      win: {
+        title: "If you had a good day",
+        text: "Hold onto it.\nYou earned that.\nLet it be evidence on the harder days."
+      }
+    };
+
+    document.querySelectorAll(".openbtn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const key = btn.getAttribute("data-key");
+        const item = OPEN_WHEN[key];
+        document.getElementById("openTitle").textContent = item.title;
+        document.getElementById("openText").textContent = item.text;
+      });
+    });
+
+    /* -------------------------
+       Random facts
+    ------------------------- */
+    const FACTS = [
+      "Honey never spoils — sealed jars have been found edible thousands of years later.",
+      "Octopuses have three hearts and blue blood.",
+      "A day on Venus is longer than a year on Venus.",
+      "Bananas are berries; strawberries aren’t (botanically speaking).",
+      "Your brain uses roughly 20% of your body’s energy.",
+      "Lightning is ~5× hotter than the surface of the sun.",
+      "A group of flamingos is called a ‘flamboyance.’",
+      "Some turtles can breathe through their butts (cloacal respiration).",
+      "The Eiffel Tower can grow in summer due to thermal expansion."
+    ];
+    function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+
+    document.getElementById("factBtn").onclick = () => {
+      document.getElementById("randomFact").textContent = pick(FACTS);
+      document.getElementById("factTag").textContent = "New";
+      setTimeout(() => document.getElementById("factTag").textContent = "Tap", 1500);
+    };
+
+    /* -------------------------
+       Kiss audio
+       1) Upload your audio files into the repo (same folder as index.html),
+          e.g. kiss1.mp3, kiss2.mp3, kiss3.mp3
+       2) List them below.
+    ------------------------- */
+    const KISS_AUDIO_FILES = [
+      "kiss1.mp3",
+      "kiss2.mp3"
+      // add more like: "kiss3.mp3"
+    ];
+
+    const kissAudio = document.getElementById("kissAudio");
+    const kissNote  = document.getElementById("kissNote");
+
+    function randomKissFile(){
+      if (!KISS_AUDIO_FILES.length) return null;
+      return KISS_AUDIO_FILES[Math.floor(Math.random()*KISS_AUDIO_FILES.length)];
+    }
+
+    document.getElementById("kissBtn").addEventListener("click", async () => {
+      const f = randomKissFile();
+      if (!f){
+        kissNote.textContent = "Upload a kiss audio file and add its filename in KISS_AUDIO_FILES.";
+        return;
+      }
+      try{
+        kissAudio.pause();
+        kissAudio.currentTime = 0;
+        kissAudio.src = f;
+        await kissAudio.play(); // requires user click (this button counts)
+        kissNote.textContent = "mwah.";
+      } catch(e){
+        kissNote.textContent = "Your browser blocked playback. Try again after interacting with the page.";
+      }
+    });
+
+    document.getElementById("kissStopBtn").addEventListener("click", () => {
+      kissAudio.pause();
+      kissAudio.currentTime = 0;
+      kissNote.textContent = "ok.";
+    });
+
+    /* -------------------------
+       Recipes (random URL list you control)
+       Paste YOUR recipe URLs here.
+    ------------------------- */
+    const RECIPE_URLS = [
+      // Paste your recipe URLs here (as many as you want):
+      // "https://www.seriouseats.com/...",
+      // "https://www.budgetbytes.com/...",
+      // "https://www.allrecipes.com/..."
+    ];
+
+    const recipeBtn  = document.getElementById("recipeBtn");
+    const recipeLink = document.getElementById("recipeLink");
+    const recipeOpen = document.getElementById("recipeOpen");
+    const recipeLabel= document.getElementById("recipeLabel");
+
+    function prettyHost(url){
+      try{
+        const u = new URL(url);
+        return u.hostname.replace("www.","");
+      } catch(e){
+        return "recipe link";
+      }
+    }
+
+    function pickRecipe(){
+      if (!RECIPE_URLS.length){
+        recipeLabel.textContent = "Add your recipe URLs in RECIPE_URLS (in the code) and this will randomize them.";
+        recipeLink.style.display = "none";
+        recipeOpen.style.display = "none";
+        return;
+      }
+      const url = RECIPE_URLS[Math.floor(Math.random()*RECIPE_URLS.length)];
+      recipeLabel.textContent = "Here’s one:";
+      recipeLink.textContent = `Open on ${prettyHost(url)}`;
+      recipeLink.href = url;
+      recipeLink.style.display = "inline-flex";
+
+      recipeOpen.href = url;
+      recipeOpen.style.display = "inline-block";
+    }
+
+    recipeBtn.addEventListener("click", pickRecipe);
+    // Optional: pick one on page load
+    // pickRecipe();
   </script>
 </body>
 </html>
