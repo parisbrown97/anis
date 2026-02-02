@@ -7,11 +7,12 @@
 
   <style>
     :root {
-      --bg: #f7f8fa;
+      --bg: #f4f6f5;
       --card: #ffffff;
       --text: #1f2933;
       --muted: #6b7280;
-      --accent: #4b5563;
+      --accent: #355e3b; /* hunter green */
+      --accent-soft: #e6efe8;
     }
 
     body {
@@ -31,6 +32,7 @@
       border-radius: 20px;
       padding: 28px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+      border-top: 6px solid var(--accent);
     }
 
     h1 {
@@ -82,7 +84,7 @@
     }
 
     .footer {
-      margin-top: 24px;
+      margin-top: 22px;
       font-size: 12px;
       color: #9ca3af;
     }
@@ -96,10 +98,9 @@
 <body>
   <div class="card">
     <h1>Hey Anis.</h1>
-    <p>This is here for whenever things feel heavy — no pressure.</p>
+    <p>This is here for whenever things feel heavy — no expectations.</p>
 
-    <!-- 🔊 Spotify Playlist -->
-    <!-- Replace PLAYLIST_ID with your actual Spotify playlist ID -->
+    <!-- 🎧 Spotify Playlist -->
     <iframe
       style="border-radius:12px"
       src="https://open.spotify.com/embed/playlist/PLAYLIST_ID"
@@ -111,7 +112,7 @@
     </iframe>
 
     <p style="font-size:13px;color:#9ca3af;">
-      Something calm for long days.
+      Something steady for long days.
     </p>
 
     <div class="controls">
@@ -135,33 +136,33 @@
     const messages = {
       any: [
         "You earned this — completely.",
-        "One step at a time is still progress.",
+        "One point at a time still wins the match.",
         "You don’t have to be perfect to be good at this.",
         "You belong exactly where you are."
       ],
       pre: [
         "Deep breath. You’re prepared for today.",
-        "Show up as yourself — that’s enough.",
         "Quiet confidence goes a long way.",
+        "Trust your training — it shows.",
         "You’ve done harder things than this."
       ],
       post: [
         "That was a long day. Be gentle with yourself.",
         "You carried a lot today — it’s okay to put it down now.",
-        "Rest counts as part of the work.",
-        "I hope you get real sleep tonight."
+        "Rest is part of staying sharp.",
+        "Even champions recover between matches."
       ],
       doubt: [
         "Doubt doesn’t mean you’re failing — it means you care.",
-        "Every good doctor feels this at some point.",
-        "You’re learning. That’s the job.",
-        "You don’t need to prove anything right now."
+        "Every good doctor questions themselves.",
+        "Learning is the point — mastery comes later.",
+        "You’re exactly where you’re supposed to be."
       ],
       proud: [
-        "You should feel proud — I do.",
-        "This is the result of years of showing up.",
-        "Hold onto this on harder days.",
-        "You’re becoming the doctor you hoped you’d be."
+        "You should feel proud — you earned this.",
+        "Years of effort led to today.",
+        "Hold onto this feeling on harder days.",
+        "You’re becoming an excellent physician."
       ]
     };
 
@@ -171,6 +172,10 @@
       "",
       "",
       "Drink some water.",
+      "Hydration matters. (You know this.)",
+      "Sharp mind. Steady hands.",
+      "Ravenclaws think before they act.",
+      "🇲🇦 One team, one goal.",
       "Text me when you’re done, Anis."
     ];
 
