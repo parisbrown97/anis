@@ -7,31 +7,44 @@
 
   <style>
     :root {
-      --bg: #f4f6f5;
       --card: #ffffff;
       --text: #1f2933;
       --muted: #6b7280;
       --accent: #355e3b; /* hunter green */
-      --accent-soft: #e6efe8;
     }
 
     body {
       margin: 0;
       padding: 24px;
-      background: var(--bg);
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       color: var(--text);
       display: flex;
       justify-content: center;
+
+      background-image: url("https://imgur.com/gallery/city-lights-66iBT");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    /* dark overlay for readability */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.35);
+      z-index: 0;
     }
 
     .card {
+      position: relative;
+      z-index: 1;
       max-width: 640px;
       width: 100%;
       background: var(--card);
       border-radius: 20px;
       padding: 28px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
       border-top: 6px solid var(--accent);
     }
 
@@ -96,6 +109,8 @@
 </head>
 
 <body>
+  <div class="overlay"></div>
+
   <div class="card">
     <h1>Hey Anis.</h1>
     <p>This is here for whenever things feel heavy — no expectations.</p>
