@@ -6,89 +6,177 @@
   <title>You’ve Got This</title>
 
   <style>
-    :root {
-      --card: #ffffff;
-      --text: #1f2933;
+    :root{
+      --accent: #355e3b;        /* hunter green */
+      --card: rgba(255,255,255,0.92);
+      --text: #111827;
       --muted: #6b7280;
-      --accent: #355e3b; /* hunter green */
+      --border: rgba(229,231,235,0.9);
+      --shadow: 0 10px 30px rgba(0,0,0,0.25);
+      --overlay: rgba(0,0,0,0.45);
+      --pill: rgba(255,255,255,0.75);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root{
+        --card: rgba(17,24,39,0.88);
+        --text: #f9fafb;
+        --muted: rgba(249,250,251,0.75);
+        --border: rgba(55,65,81,0.8);
+        --overlay: rgba(0,0,0,0.6);
+        --pill: rgba(17,24,39,0.65);
+        --shadow: 0 10px 30px rgba(0,0,0,0.5);
+      }
+    }
+
+    body.dark {
+      --card: rgba(17,24,39,0.88);
+      --text: #f9fafb;
+      --muted: rgba(249,250,251,0.75);
+      --border: rgba(55,65,81,0.8);
+      --overlay: rgba(0,0,0,0.6);
+      --pill: rgba(17,24,39,0.65);
+      --shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
 
     body {
       margin: 0;
-      padding: 24px;
+      min-height: 100vh;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       color: var(--text);
       display: flex;
       justify-content: center;
-
-      background-image: url("https://imgur.com/gallery/city-lights-66iBT");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
+      align-items: flex-start;
+      padding: 24px;
+      overflow-x: hidden;
     }
 
-    /* dark overlay for readability */
-    .overlay {
+    .bg-video {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.35);
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
       z-index: 0;
     }
 
-    .card {
-      position: relative;
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--overlay);
       z-index: 1;
-      max-width: 640px;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 2;
       width: 100%;
-      background: var(--card);
-      border-radius: 20px;
-      padding: 28px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      border-top: 6px solid var(--accent);
+      max-width: 700px;
     }
 
-    h1 {
-      margin-top: 0;
-      font-weight: 600;
-      letter-spacing: -0.02em;
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
     }
 
-    p {
+    .pill {
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: var(--pill);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+    }
+
+    .pill label {
+      font-size: 14px;
       color: var(--muted);
-      margin-bottom: 16px;
     }
 
-    select, button {
-      font-size: 16px;
-      padding: 12px 14px;
-      border-radius: 12px;
-      border: 1px solid #e5e7eb;
-    }
-
-    button {
-      background: var(--accent);
-      color: white;
-      border: none;
+    .pill input {
+      accent-color: var(--accent);
       cursor: pointer;
     }
 
-    button:hover {
-      opacity: 0.95;
+    .pill button {
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 22px;
+      padding: 26px;
+      box-shadow: var(--shadow);
+      border-top: 6px solid var(--accent);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(14px);
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: 28px;
+      font-weight: 650;
+    }
+
+    p {
+      margin: 0 0 14px;
+      color: var(--muted);
+    }
+
+    iframe {
+      margin-top: 10px;
+    }
+
+    .spotify-note {
+      font-size: 13px;
+      color: rgba(156,163,175,0.95);
+      margin-top: 6px;
     }
 
     .controls {
       display: flex;
       gap: 12px;
+      margin: 18px 0 14px;
       flex-wrap: wrap;
-      margin-bottom: 22px;
+    }
+
+    select, .action {
+      font-size: 16px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    select {
+      background: rgba(255,255,255,0.6);
+    }
+
+    body.dark select {
+      background: rgba(17,24,39,0.6);
+      color: white;
+    }
+
+    .action {
+      background: var(--accent);
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
     }
 
     .message {
       font-size: 22px;
       line-height: 1.4;
       min-height: 80px;
-      margin: 18px 0;
+      margin: 14px 0 10px;
     }
 
     .signature {
@@ -97,117 +185,128 @@
     }
 
     .footer {
-      margin-top: 22px;
       font-size: 12px;
-      color: #9ca3af;
-    }
-
-    iframe {
-      margin: 12px 0 4px;
+      color: rgba(156,163,175,0.9);
+      margin-top: 10px;
     }
   </style>
 </head>
 
 <body>
+  <!-- 🎥 Toronto night video (replace file or URL) -->
+  <video class="bg-video" autoplay muted loop playsinline>
+    <source src="TORONTO_NIGHT_VIDEO.mp4" type="video/mp4">
+  </video>
   <div class="overlay"></div>
 
-  <div class="card">
-    <h1>Hey Anis.</h1>
-    <p>This is here for whenever things feel heavy — no expectations.</p>
-
-    <!-- 🎧 Spotify Playlist -->
-    <iframe
-      style="border-radius:12px"
-      src="https://open.spotify.com/embed/playlist/PLAYLIST_ID"
-      width="100%"
-      height="80"
-      frameborder="0"
-      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-      loading="lazy">
-    </iframe>
-
-    <p style="font-size:13px;color:#9ca3af;">
-      Something steady for long days.
-    </p>
-
-    <div class="controls">
-      <select id="moment">
-        <option value="any">Any moment</option>
-        <option value="pre">Before a long day</option>
-        <option value="post">After call</option>
-        <option value="doubt">When doubt creeps in</option>
-        <option value="proud">A good day</option>
-      </select>
-
-      <button id="btn">Give me one thing</button>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="pill">
+        <input type="checkbox" id="matchDay">
+        <label for="matchDay">🇲🇦 Match day mode</label>
+      </div>
+      <div class="pill">
+        <button id="themeBtn">Toggle night mode</button>
+      </div>
     </div>
 
-    <div class="message" id="message"></div>
-    <div class="signature" id="signature"></div>
-    <div class="footer" id="easter"></div>
+    <div class="card">
+      <h1>Hey Anis.</h1>
+      <p>This is here for whenever things feel heavy — no expectations.</p>
+
+      <!-- 🎧 Spotify embed (your code, slightly resized) -->
+      <iframe
+        data-testid="embed-iframe"
+        style="border-radius:12px"
+        src="https://open.spotify.com/embed/playlist/37i9dQZF1E4qQ00I1Jm1ay?utm_source=generator&theme=0"
+        width="100%"
+        height="90"
+        frameborder="0"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy">
+      </iframe>
+
+      <div class="spotify-note">Something steady for long days.</div>
+
+      <div class="controls">
+        <select id="moment">
+          <option value="any">Any moment</option>
+          <option value="pre">Before a long day</option>
+          <option value="post">After call</option>
+          <option value="doubt">When doubt creeps in</option>
+          <option value="proud">A good day</option>
+        </select>
+        <button class="action" id="btn">Give me one thing</button>
+      </div>
+
+      <div class="message" id="message"></div>
+      <div class="signature" id="signature"></div>
+      <div class="footer" id="easter"></div>
+    </div>
   </div>
 
   <script>
+    // Theme toggle
+    document.getElementById("themeBtn").onclick = () => {
+      document.body.classList.toggle("dark");
+    };
+
     const messages = {
       any: [
         "You earned this — completely.",
-        "One point at a time still wins the match.",
+        "One step at a time is still progress.",
         "You don’t have to be perfect to be good at this.",
         "You belong exactly where you are."
       ],
       pre: [
         "Deep breath. You’re prepared for today.",
-        "Quiet confidence goes a long way.",
-        "Trust your training — it shows.",
-        "You’ve done harder things than this."
+        "One point at a time still wins the match.",
+        "Reset between points — the last one doesn’t matter.",
+        "Footwork first. Everything else follows."
       ],
       post: [
         "That was a long day. Be gentle with yourself.",
         "You carried a lot today — it’s okay to put it down now.",
-        "Rest is part of staying sharp.",
-        "Even champions recover between matches."
+        "Rest is part of staying sharp."
       ],
       doubt: [
         "Doubt doesn’t mean you’re failing — it means you care.",
         "Every good doctor questions themselves.",
-        "Learning is the point — mastery comes later.",
-        "You’re exactly where you’re supposed to be."
+        "Learning is the point — mastery comes later."
       ],
       proud: [
         "You should feel proud — you earned this.",
         "Years of effort led to today.",
-        "Hold onto this feeling on harder days.",
         "You’re becoming an excellent physician."
       ]
     };
 
-    const signature = "— someone in your corner";
+    const matchBoost = [
+      "🇲🇦 One team, one goal.",
+      "Match-day mindset: calm, focused, relentless."
+    ];
 
     const easterEggs = [
       "",
-      "",
       "Drink some water.",
-      "Hydration matters. (You know this.)",
       "Sharp mind. Steady hands.",
       "Ravenclaws think before they act.",
-      "🇲🇦 One team, one goal.",
       "Text me when you’re done, Anis."
     ];
 
-    function pick(arr) {
-      return arr[Math.floor(Math.random() * arr.length)];
-    }
+    const signature = "— someone in your corner";
 
-    document.getElementById("btn").addEventListener("click", () => {
+    function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+
+    document.getElementById("btn").onclick = () => {
       const moment = document.getElementById("moment").value;
-      const pool = moment === "any"
-        ? Object.values(messages).flat()
-        : messages[moment];
+      let pool = moment === "any" ? Object.values(messages).flat() : messages[moment];
+      if (document.getElementById("matchDay").checked) pool = pool.concat(matchBoost);
 
       document.getElementById("message").textContent = pick(pool);
       document.getElementById("signature").textContent = signature;
       document.getElementById("easter").textContent = pick(easterEggs);
-    });
+    };
   </script>
 </body>
 </html>
