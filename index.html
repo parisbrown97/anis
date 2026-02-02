@@ -59,6 +59,61 @@
       object-fit: cover;
       z-index: 0;
     }
+.weather-wrap{
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
+.weather-title{
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.weather-grid{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.weather-card{
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 10px 12px;
+  background: rgba(255,255,255,0.55);
+}
+
+body.dark .weather-card{
+  background: rgba(17,24,39,0.45);
+}
+
+.w-city{
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.w-temp{
+  font-size: 18px;
+  font-weight: 650;
+  margin-bottom: 2px;
+}
+
+.w-desc{
+  font-size: 12px;
+  color: rgba(156,163,175,0.95);
+}
+
+.weather-note{
+  margin-top: 8px;
+  font-size: 12px;
+  color: rgba(156,163,175,0.95);
+}
+
+@media (max-width: 560px){
+  .weather-grid{ grid-template-columns: 1fr; }
+}
 
     .overlay {
       position: fixed;
@@ -227,6 +282,31 @@
       </iframe>
 
       <div class="spotify-note">Something steady for long days.</div>
+<!-- 🌦 Weather strip -->
+<div class="weather-wrap">
+  <div class="weather-title">Weather right now</div>
+  <div class="weather-grid" id="weatherGrid">
+    <div class="weather-card" data-city="Charlotte" data-lat="35.2271" data-lon="-80.8431">
+      <div class="w-city">Charlotte, NC</div>
+      <div class="w-temp">—</div>
+      <div class="w-desc">Loading…</div>
+    </div>
+
+    <div class="weather-card" data-city="Los Angeles" data-lat="34.0522" data-lon="-118.2437">
+      <div class="w-city">Los Angeles, CA</div>
+      <div class="w-temp">—</div>
+      <div class="w-desc">Loading…</div>
+    </div>
+
+    <div class="weather-card" data-city="Atlanta" data-lat="33.7490" data-lon="-84.3880">
+      <div class="w-city">Atlanta, GA</div>
+      <div class="w-temp">—</div>
+      <div class="w-desc">Loading…</div>
+    </div>
+  </div>
+
+  <div class="weather-note" id="weatherNote"></div>
+</div>
 
       <div class="controls">
         <select id="moment">
@@ -307,6 +387,74 @@
       document.getElementById("signature").textContent = signature;
       document.getElementById("easter").textContent = pick(easterEggs);
     };
+    // --- WEATHER (Open-Meteo, no API key) ---
+const WMO = {
+  0: "Clear",
+  1: "Mostly clear",
+  2: "Partly cloudy",
+  3: "Overcast",
+  45: "Fog",
+  48: "Rime fog",
+  51: "Light drizzle",
+  53: "Drizzle",
+  55: "Heavy drizzle",
+  56: "Freezing drizzle",
+  57: "Freezing drizzle",
+  61: "Light rain",
+  63: "Rain",
+  65: "Heavy rain",
+  66: "Freezing rain",
+  67: "Freezing rain",
+  71: "Light snow",
+  73: "Snow",
+  75: "Heavy snow",
+  77: "Snow grains",
+  80: "Rain showers",
+  81: "Rain showers",
+  82: "Violent showers",
+  85: "Snow showers",
+  86: "Snow showers",
+  95: "Thunderstorm",
+  96: "Thunderstorm + hail",
+  99: "Thunderstorm + hail"
+};
+
+async function loadWeather() {
+  const cards = Array.from(document.querySelectorAll(".weather-card"));
+  const note = document.getElementById("weatherNote");
+  note.textContent = "";
+
+  const requests = cards.map(async (card) => {
+    const lat = card.getAttribute("data-lat");
+    const lon = card.getAttribute("data-lon");
+
+    // current weather; Fahrenheit + US-friendly
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=auto`;
+
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+      const temp = Math.round(data.current.temperature_2m);
+      const code = data.current.weather_code;
+      const desc = WMO[code] || "—";
+
+      card.querySelector(".w-temp").textContent = `${temp}°F`;
+      card.querySelector(".w-desc").textContent = desc;
+    } catch (e) {
+      card.querySelector(".w-desc").textContent = "Unavailable";
+    }
+  });
+
+  await Promise.all(requests);
+
+  const now = new Date();
+  note.textContent = `Updated ${now.toLocaleString()}`;
+}
+
+// load once on page open, then refresh every 30 min
+loadWeather();
+setInterval(loadWeather, 30 * 60 * 1000);
+
   </script>
 </body>
 </html>
