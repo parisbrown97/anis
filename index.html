@@ -3,57 +3,53 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Moon Trip</title>
+  <title>For Anis</title>
 
   <style>
     :root{
-      --accent:#355e3b; /* hunter green */
       --bg:#070A12;
       --card: rgba(17,24,39,0.72);
       --border: rgba(148,163,184,0.18);
       --text:#F8FAFC;
       --muted: rgba(248,250,252,0.72);
+      --accent:#355e3b; /* hunter green */
+      --shadow: 0 18px 60px rgba(0,0,0,0.55);
       --glow: 0 0 40px rgba(53,94,59,0.35);
-      --shadow: 0 14px 50px rgba(0,0,0,0.55);
+      --pink: rgba(236,72,153,0.78);
+      --purple: rgba(99,102,241,0.78);
     }
 
-    *{box-sizing:border-box}
+    *{ box-sizing: border-box; }
     body{
       margin:0;
       min-height:100vh;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: radial-gradient(1200px 800px at 20% 20%, rgba(53,94,59,0.18), transparent 60%),
-                  radial-gradient(900px 600px at 80% 30%, rgba(99,102,241,0.16), transparent 60%),
-                  radial-gradient(900px 700px at 60% 90%, rgba(236,72,153,0.12), transparent 60%),
-                  var(--bg);
       color: var(--text);
+      background:
+        radial-gradient(1200px 800px at 20% 15%, rgba(53,94,59,0.18), transparent 60%),
+        radial-gradient(900px 600px at 80% 25%, rgba(99,102,241,0.14), transparent 60%),
+        radial-gradient(900px 700px at 60% 90%, rgba(236,72,153,0.10), transparent 60%),
+        var(--bg);
       overflow-x:hidden;
     }
 
-    /* starfield */
-    .stars, .stars2{
+    /* subtle stars */
+    .stars{
       position:fixed; inset:0; pointer-events:none; z-index:0;
       background-image:
-        radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,0.7), transparent 60%),
-        radial-gradient(1px 1px at 120px 80px, rgba(255,255,255,0.5), transparent 60%),
-        radial-gradient(1px 1px at 260px 140px, rgba(255,255,255,0.45), transparent 60%),
-        radial-gradient(1px 1px at 400px 220px, rgba(255,255,255,0.55), transparent 60%),
-        radial-gradient(2px 2px at 520px 60px, rgba(255,255,255,0.35), transparent 60%),
-        radial-gradient(1px 1px at 700px 180px, rgba(255,255,255,0.4), transparent 60%);
-      background-size: 800px 400px;
-      opacity:0.45;
-      animation: drift 90s linear infinite;
-    }
-    .stars2{
-      opacity:0.25;
-      filter: blur(0.3px);
-      background-size: 1000px 520px;
-      animation-duration: 140s;
-      transform: scale(1.1);
+        radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,0.65), transparent 60%),
+        radial-gradient(1px 1px at 120px 80px, rgba(255,255,255,0.45), transparent 60%),
+        radial-gradient(1px 1px at 260px 140px, rgba(255,255,255,0.40), transparent 60%),
+        radial-gradient(1px 1px at 400px 220px, rgba(255,255,255,0.50), transparent 60%),
+        radial-gradient(2px 2px at 520px 60px, rgba(255,255,255,0.32), transparent 60%),
+        radial-gradient(1px 1px at 700px 180px, rgba(255,255,255,0.38), transparent 60%);
+      background-size: 900px 500px;
+      opacity:0.35;
+      animation: drift 120s linear infinite;
     }
     @keyframes drift{
       from { background-position: 0 0; }
-      to   { background-position: -1200px 800px; }
+      to   { background-position: -1400px 900px; }
     }
 
     .wrap{
@@ -61,29 +57,33 @@
       z-index:1;
       max-width: 980px;
       margin: 0 auto;
-      padding: 26px 18px 72px;
+      padding: 28px 18px 76px;
+      display:flex;
+      flex-direction: column;
+      gap: 16px;
     }
 
-    .topline{
+    .header{
       display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px;
-      margin-bottom: 14px;
-      opacity:0.9;
-      flex-wrap:wrap;
+      justify-content: space-between;
+      align-items:flex-start;
+      gap: 12px;
+      flex-wrap: wrap;
+      opacity:0.95;
     }
-    .tag{
+
+    .badge{
       display:inline-flex;
       align-items:center;
       gap:10px;
       padding: 10px 12px;
-      border: 1px solid var(--border);
       border-radius: 999px;
+      border: 1px solid var(--border);
       background: rgba(17,24,39,0.35);
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(12px);
     }
-    .tag small{ color: var(--muted); }
+    .badge small{ color: var(--muted); }
+    .badge strong{ letter-spacing: -0.01em; }
 
     .card{
       border: 1px solid var(--border);
@@ -95,142 +95,246 @@
     }
 
     .hero{
-      padding: 26px 22px 22px;
+      padding: 22px 22px 16px;
       border-bottom: 1px solid rgba(148,163,184,0.14);
       position:relative;
     }
 
     h1{
-      margin:0 0 8px;
+      margin:0 0 6px;
       font-size: 30px;
+      font-weight: 760;
       letter-spacing: -0.02em;
-      font-weight: 720;
     }
     .sub{
       margin:0;
       color: var(--muted);
       line-height:1.4;
-      max-width: 60ch;
+      max-width: 62ch;
+      font-size: 15px;
     }
 
     .moon{
       position:absolute;
-      right: -40px;
-      top: -40px;
-      width: 190px;
-      height: 190px;
+      right: -46px;
+      top: -54px;
+      width: 200px;
+      height: 200px;
       border-radius: 999px;
       background:
-        radial-gradient(circle at 35% 35%, rgba(255,255,255,0.9), rgba(255,255,255,0.15) 55%, rgba(255,255,255,0.05) 72%, transparent 76%),
-        radial-gradient(circle at 60% 60%, rgba(255,255,255,0.18), transparent 60%),
-        radial-gradient(circle at 40% 70%, rgba(255,255,255,0.12), transparent 60%);
-      filter: drop-shadow(0 0 25px rgba(255,255,255,0.12));
-      opacity:0.9;
+        radial-gradient(circle at 35% 35%, rgba(255,255,255,0.85), rgba(255,255,255,0.14) 55%, rgba(255,255,255,0.05) 72%, transparent 76%),
+        radial-gradient(circle at 60% 60%, rgba(255,255,255,0.16), transparent 60%),
+        radial-gradient(circle at 40% 70%, rgba(255,255,255,0.10), transparent 60%);
+      filter: drop-shadow(0 0 25px rgba(255,255,255,0.10));
+      opacity:0.85;
       transform: rotate(-10deg);
+      pointer-events:none;
     }
 
+    /* Envelopes */
     .stage{
       padding: 18px 22px 22px;
     }
 
-    .progress{
-      display:flex;
-      gap:8px;
-      margin: 6px 0 14px;
-      align-items:center;
+    .envelopeGrid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 10px;
     }
-    .dot{
-      width: 10px; height: 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.25);
-      background: rgba(148,163,184,0.12);
-    }
-    .dot.on{
-      background: rgba(53,94,59,0.75);
-      border-color: rgba(53,94,59,0.75);
-      box-shadow: var(--glow);
+    @media (max-width: 820px){
+      .envelopeGrid{ grid-template-columns: 1fr; }
     }
 
-    .panel{
+    .env{
+      position:relative;
+      border: 1px solid rgba(148,163,184,0.18);
+      border-radius: 22px;
+      background: rgba(2,6,23,0.28);
+      overflow:hidden;
+      padding: 16px;
+      box-shadow: inset 0 0 0 1px rgba(53,94,59,0.06);
+      min-height: 220px;
+    }
+
+    .envTop{
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .envTop .tag{
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.18);
+      background: rgba(17,24,39,0.28);
+      color: rgba(248,250,252,0.82);
+      white-space:nowrap;
+    }
+
+    .envTitle{
+      font-size: 18px;
+      font-weight: 740;
+      letter-spacing: -0.01em;
+      margin: 6px 0 6px;
+    }
+    .envSub{
+      color: var(--muted);
+      margin:0 0 14px;
+      line-height:1.4;
+      font-size: 14px;
+      max-width: 55ch;
+    }
+
+    .envBtn{
+      width: 100%;
+      border: none;
+      border-radius: 16px;
+      padding: 12px 14px;
+      font-weight: 780;
+      letter-spacing: -0.01em;
+      cursor:pointer;
+      background: linear-gradient(90deg, rgba(53,94,59,0.92), rgba(53,94,59,0.62));
+      color: var(--text);
+      box-shadow: var(--glow);
+      transition: transform 120ms ease;
+    }
+    .envBtn:hover{ transform: translateY(-1px); }
+    .envBtn:active{ transform: translateY(0); }
+
+    .envBtn.secondary{
+      background: linear-gradient(90deg, rgba(236,72,153,0.82), rgba(99,102,241,0.52));
+      box-shadow: 0 0 36px rgba(236,72,153,0.22);
+    }
+
+    /* envelope art */
+    .envArt{
+      position:absolute;
+      inset:auto 0 0 0;
+      height: 120px;
+      pointer-events:none;
+      opacity:0.9;
+    }
+    .envArt .back{
+      position:absolute;
+      left: 14px; right: 14px; bottom: 14px;
+      height: 78px;
+      border-radius: 16px;
+      background: rgba(17,24,39,0.40);
+      border: 1px solid rgba(148,163,184,0.14);
+    }
+    .envArt .flap{
+      position:absolute;
+      left: 14px; right: 14px; bottom: 44px;
+      height: 58px;
+      clip-path: polygon(0 0, 50% 70%, 100% 0, 100% 100%, 0 100%);
+      background: rgba(17,24,39,0.55);
+      border: 1px solid rgba(148,163,184,0.10);
+      transform-origin: top center;
+      transition: transform 420ms ease;
+    }
+    .envArt .heart{
+      position:absolute;
+      left: 50%;
+      bottom: 24px;
+      transform: translateX(-50%);
+      font-size: 22px;
+      filter: drop-shadow(0 0 12px rgba(236,72,153,0.18));
+    }
+    .env.open .envArt .flap{
+      transform: rotateX(160deg);
+    }
+
+    .hint{
+      margin-top: 10px;
+      font-size: 12px;
+      color: rgba(248,250,252,0.55);
+    }
+
+    /* Letter modal */
+    .modalOverlay{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      backdrop-filter: blur(8px);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index: 5;
+      padding: 18px;
+    }
+    .modalOverlay.show{ display:flex; }
+
+    .modal{
+      width: min(720px, 100%);
+      border-radius: 22px;
+      border: 1px solid rgba(148,163,184,0.18);
+      background: rgba(17,24,39,0.92);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .modalTop{
+      padding: 14px 16px;
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      gap: 10px;
+      border-bottom: 1px solid rgba(148,163,184,0.12);
+    }
+    .modalTop strong{ letter-spacing: -0.01em; }
+    .close{
+      border: 1px solid rgba(148,163,184,0.18);
+      background: rgba(2,6,23,0.35);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 8px 10px;
+      cursor:pointer;
+    }
+    .modalBody{
+      padding: 16px;
+      line-height: 1.55;
+      color: rgba(248,250,252,0.86);
+      white-space: pre-wrap;
+      font-size: 15px;
+    }
+    .modalBody em{ color: rgba(248,250,252,0.70); }
+
+    /* Tickets reveal */
+    .ticketArea{
+      margin-top: 14px;
       display:none;
       animation: pop 420ms ease-out;
     }
-    .panel.show{ display:block; }
+    .ticketArea.show{ display:block; }
     @keyframes pop{
       from { transform: translateY(10px); opacity:0; }
       to   { transform: translateY(0); opacity:1; }
     }
 
-    .line{
-      font-size: 20px;
-      font-weight: 650;
-      line-height:1.28;
-      margin: 2px 0 10px;
-    }
-    .body{
-      color: var(--muted);
-      line-height: 1.45;
-      margin: 0 0 16px;
-      font-size: 15px;
-    }
-
-    .btnrow{
-      display:flex;
-      gap:10px;
-      flex-wrap: wrap;
-      margin-top: 6px;
-    }
-    button{
-      cursor:pointer;
-      border-radius: 14px;
-      border: 1px solid rgba(148,163,184,0.22);
-      background: rgba(17,24,39,0.35);
-      color: var(--text);
-      padding: 10px 12px;
-      font-size: 14px;
-    }
-    button.primary{
-      background: var(--accent);
-      border: none;
-      font-weight: 700;
-    }
-    button:hover{ transform: translateY(-1px); }
-    button:active{ transform: translateY(0); }
-
-    .hint{
-      margin-top:10px;
-      font-size: 12px;
-      color: rgba(248,250,252,0.55);
-    }
-
-    /* Ticket vault */
-    .vault{
-      margin-top: 16px;
-      border-radius: 20px;
+    .ticketVault{
+      border-radius: 22px;
       border: 1px solid rgba(148,163,184,0.16);
-      background: rgba(2,6,23,0.35);
+      background: rgba(2,6,23,0.28);
       overflow:hidden;
-      box-shadow: inset 0 0 0 1px rgba(53,94,59,0.08);
     }
+
     .vaultTop{
       padding: 14px 14px 12px;
       display:flex;
       justify-content:space-between;
-      gap:10px;
       align-items:center;
+      gap: 10px;
       border-bottom: 1px solid rgba(148,163,184,0.14);
-    }
-    .vaultTop .title{
-      font-weight: 700;
-      letter-spacing: -0.01em;
     }
     .pill{
       font-size: 12px;
-      padding: 5px 10px;
+      padding: 6px 10px;
       border-radius: 999px;
       border: 1px solid rgba(148,163,184,0.18);
-      background: rgba(17,24,39,0.35);
-      color: rgba(248,250,252,0.8);
+      background: rgba(17,24,39,0.28);
+      color: rgba(248,250,252,0.82);
       white-space:nowrap;
     }
 
@@ -247,17 +351,16 @@
     .ticket{
       border-radius: 18px;
       border: 1px solid rgba(148,163,184,0.18);
-      background: rgba(17,24,39,0.32);
+      background: rgba(17,24,39,0.30);
       overflow:hidden;
-      position:relative;
     }
     .ticketHeader{
       padding: 14px 14px 10px;
       border-bottom: 1px dashed rgba(148,163,184,0.18);
       display:flex;
       justify-content:space-between;
-      gap:12px;
       align-items:flex-start;
+      gap: 12px;
     }
     .ticketHeader .meta{
       display:flex;
@@ -272,7 +375,7 @@
       font-size: 13px;
       color: rgba(248,250,252,0.75);
     }
-    .ticketHeader .stamp{
+    .stamp{
       font-size: 12px;
       padding: 6px 10px;
       border-radius: 999px;
@@ -322,7 +425,7 @@
       border: 1px solid rgba(148,163,184,0.16);
       border-radius: 14px;
       padding: 10px 12px;
-      background: rgba(17,24,39,0.22);
+      background: rgba(17,24,39,0.20);
     }
     .kv small{ color: rgba(248,250,252,0.6); display:block; margin-bottom: 4px; }
     .kv div{ font-weight: 650; }
@@ -330,7 +433,7 @@
     .side{
       border-radius: 18px;
       border: 1px solid rgba(148,163,184,0.18);
-      background: rgba(17,24,39,0.26);
+      background: rgba(17,24,39,0.24);
       padding: 14px;
       display:flex;
       flex-direction:column;
@@ -338,7 +441,7 @@
     }
     .side .flirt{
       font-size: 16px;
-      font-weight: 700;
+      font-weight: 780;
       line-height: 1.25;
     }
     .side .tiny{
@@ -346,48 +449,49 @@
       font-size: 13px;
       line-height: 1.45;
     }
-
-    .revealBtn{
-      width:100%;
-      padding: 12px 14px;
-      border-radius: 16px;
-      background: linear-gradient(90deg, rgba(53,94,59,0.92), rgba(53,94,59,0.62));
+    .btnrow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top: 6px;
+    }
+    .btn{
+      border-radius: 14px;
+      border: 1px solid rgba(148,163,184,0.22);
+      background: rgba(17,24,39,0.28);
+      color: var(--text);
+      padding: 10px 12px;
+      font-size: 14px;
+      cursor:pointer;
+    }
+    .btn.primary{
+      background: var(--accent);
       border: none;
-      font-weight: 800;
-      letter-spacing: -0.01em;
+      font-weight: 760;
       box-shadow: var(--glow);
     }
 
-    /* ticket hidden until reveal */
-    .hidden{ display:none; }
-
-    /* confetti (simple) */
+    /* Heart confetti */
     .confetti{
       position: fixed;
       inset:0;
       pointer-events:none;
-      z-index: 3;
+      z-index: 10;
       overflow:hidden;
       display:none;
     }
     .confetti.show{ display:block; }
-    .confetti i{
+    .confetti span{
       position:absolute;
-      width: 10px;
-      height: 14px;
-      background: rgba(53,94,59,0.85);
-      top: -20px;
-      left: 50%;
-      opacity: 0.9;
-      transform: translateX(-50%);
-      animation: fall 1.7s ease-in forwards;
-      border-radius: 3px;
-      filter: drop-shadow(0 0 12px rgba(53,94,59,0.25));
+      top:-30px;
+      font-size: 18px;
+      opacity: 0.95;
+      animation: fall 1.8s ease-in forwards;
+      filter: drop-shadow(0 0 12px rgba(236,72,153,0.20));
+      user-select:none;
     }
-    .confetti i:nth-child(3n){ background: rgba(99,102,241,0.78); }
-    .confetti i:nth-child(4n){ background: rgba(236,72,153,0.7); }
     @keyframes fall{
-      to { transform: translate(var(--x), 110vh) rotate(var(--r)); opacity: 0.85; }
+      to { transform: translate(var(--x), 110vh) rotate(var(--r)); opacity: 0.9; }
     }
 
     .signature{
@@ -404,24 +508,16 @@
 
 <body>
   <div class="stars"></div>
-  <div class="stars2"></div>
 
-  <div class="confetti" id="confetti">
-    <!-- little pieces created by JS too, but a few here is fine -->
-    <i style="--x:-220px;--r:120deg;left:15%"></i>
-    <i style="--x:260px;--r:220deg;left:30%"></i>
-    <i style="--x:-180px;--r:80deg;left:55%"></i>
-    <i style="--x:200px;--r:160deg;left:70%"></i>
-    <i style="--x:-260px;--r:300deg;left:85%"></i>
-  </div>
+  <div class="confetti" id="confetti"></div>
 
   <div class="wrap">
-    <div class="topline">
-      <div class="tag">
-        <strong>Moon Trip</strong>
-        <small>interactive reveal</small>
+    <div class="header">
+      <div class="badge">
+        <strong>For Anis</strong>
+        <small>open in order 😌</small>
       </div>
-      <div class="tag">
+      <div class="badge">
         <small>Destination:</small>
         <strong>Raleigh • May 12</strong>
       </div>
@@ -430,59 +526,61 @@
     <div class="card">
       <div class="hero">
         <div class="moon" aria-hidden="true"></div>
-        <h1>Hey Anis.</h1>
-        <p class="sub">Quick detour from residency stress. Three taps. One surprise. Try not to smile too hard.</p>
+        <h1>Two envelopes.</h1>
+        <p class="sub">One is a letter. One is a surprise. Please follow instructions like a responsible doctor.</p>
       </div>
 
       <div class="stage">
-        <div class="progress" aria-label="progress">
-          <div class="dot on" id="d1"></div>
-          <div class="dot" id="d2"></div>
-          <div class="dot" id="d3"></div>
-          <div class="dot" id="d4"></div>
-        </div>
+        <div class="envelopeGrid">
+          <!-- Envelope 1 -->
+          <div class="env" id="env1">
+            <div class="envTop">
+              <div class="tag">Open me first</div>
+              <div class="tag">💌</div>
+            </div>
+            <div class="envTitle">A letter from Paris</div>
+            <p class="envSub">No rush. Just you and me for a second.</p>
 
-        <!-- Panel 1 -->
-        <div class="panel show" id="p1">
-          <div class="line">Okay, doctor man…</div>
-          <p class="body">You’ve been working hard. Like, <em>criminally</em> hard. So I booked us a tiny escape.</p>
-          <div class="btnrow">
-            <button class="primary" data-next="2">Continue →</button>
+            <button class="envBtn" id="openLetter">Open envelope</button>
+
+            <div class="hint" id="hint1">P.S. I’m watching. (kidding. mostly.)</div>
+
+            <div class="envArt">
+              <div class="back"></div>
+              <div class="flap"></div>
+              <div class="heart">💚</div>
+            </div>
           </div>
-          <div class="hint">Tip: you are legally required to keep going.</div>
-        </div>
 
-        <!-- Panel 2 -->
-        <div class="panel" id="p2">
-          <div class="line">Imagine this:</div>
-          <p class="body">You. Me. Loud music. Your phone on DND. You looking cute and pretending you’re not.</p>
-          <div class="btnrow">
-            <button data-prev="1">← Back</button>
-            <button class="primary" data-next="3">Okay okay →</button>
+          <!-- Envelope 2 -->
+          <div class="env" id="env2">
+            <div class="envTop">
+              <div class="tag">Open me second</div>
+              <div class="tag">🎟️</div>
+            </div>
+            <div class="envTitle">The surprise</div>
+            <p class="envSub">You only get this after the letter. Don’t be rebellious.</p>
+
+            <button class="envBtn secondary" id="openTickets" disabled style="opacity:0.55; cursor:not-allowed;">
+              Locked 🔒
+            </button>
+
+            <div class="hint" id="hint2">Read the letter first… then come back.</div>
+
+            <div class="envArt">
+              <div class="back"></div>
+              <div class="flap"></div>
+              <div class="heart">💖</div>
+            </div>
           </div>
-          <div class="hint">If you’re blushing, just say that.</div>
         </div>
 
-        <!-- Panel 3 -->
-        <div class="panel" id="p3">
-          <div class="line">One question before I show you…</div>
-          <p class="body">Are you ready to be the main character for one night?</p>
-          <div class="btnrow">
-            <button data-prev="2">← Wait I’m nervous</button>
-            <button class="primary" data-next="4">I’m ready 😌 →</button>
-          </div>
-          <div class="hint">Correct answer: yes.</div>
-        </div>
-
-        <!-- Panel 4 (Vault) -->
-        <div class="panel" id="p4">
-          <div class="line">Welcome to the Ticket Vault.</div>
-          <p class="body">I got us tickets to see <span style="font-weight:700">:contentReference[oaicite:0]{index=0}</span> in <span style="font-weight:700">:contentReference[oaicite:1]{index=1}</span>. May 12. You’re coming with me. That’s the whole plan.</p>
-
-          <div class="vault">
+        <!-- Tickets area -->
+        <div class="ticketArea" id="ticketArea">
+          <div class="ticketVault">
             <div class="vaultTop">
-              <div class="title">Raleigh • May 12</div>
-              <div class="pill">tap reveal</div>
+              <div style="font-weight:780; letter-spacing:-0.01em;">Tickets just for you (and me)</div>
+              <div class="pill">heart confetti approved</div>
             </div>
 
             <div class="ticketGrid">
@@ -495,151 +593,216 @@
                   <div class="stamp">admit two</div>
                 </div>
 
-                <div class="ticketBody hidden" id="ticketBody">
-                  <!-- Put your ticket screenshot(s) in the same folder as index.html
-                       and name them ticket1.jpg, ticket2.jpg (or edit filenames in JS). -->
+                <div class="ticketBody">
                   <div class="ticketImg" id="ticketImg">
-                    <img id="ticketPic" src="ticket1.jpg" alt="Ticket image" />
+                    <img id="ticketPic" src="" alt="Ticket image" style="display:none;" />
+                    <div class="placeholder" id="ticketPlaceholder">
+                      Add your ticket screenshots as <b>ticket1.jpg</b>, <b>ticket2.jpg</b><br/>
+                      in the same folder as <b>index.html</b>.
+                    </div>
                   </div>
 
                   <div class="details">
-                    <div class="kv">
-                      <small>City</small>
-                      <div>Raleigh</div>
-                    </div>
-                    <div class="kv">
-                      <small>Date</small>
-                      <div>May 12</div>
-                    </div>
-                    <div class="kv">
-                      <small>Dress code</small>
-                      <div>Hot.</div>
-                    </div>
-                    <div class="kv">
-                      <small>Vibe</small>
-                      <div>Main character.</div>
-                    </div>
+                    <div class="kv"><small>City</small><div>Raleigh</div></div>
+                    <div class="kv"><small>Date</small><div>May 12</div></div>
+                    <div class="kv"><small>Dress code</small><div>Hot.</div></div>
+                    <div class="kv"><small>Vibe</small><div>Main character.</div></div>
                   </div>
 
                   <div class="btnrow">
-                    <button id="nextTicket">Next ticket</button>
-                    <button id="downloadHint">How to add tickets</button>
+                    <button class="btn" id="nextTicket">Next ticket</button>
+                    <button class="btn" id="howTo">How to add ticket pics</button>
                   </div>
 
-                  <div class="hint" id="ticketHint" style="margin-top:8px;"></div>
-                </div>
-
-                <div class="ticketBody" id="ticketLocked">
-                  <div class="ticketImg">
-                    <div class="placeholder">
-                      <div style="font-weight:750; margin-bottom:6px;">Locked 🔒</div>
-                      Press “Reveal tickets” like a good boy.
-                    </div>
-                  </div>
+                  <div class="hint" id="ticketHint"></div>
                 </div>
               </div>
 
               <div class="side">
-                <div class="flirt">Press the button. I dare you.</div>
+                <div class="flirt">Okay now say thank you 😌</div>
                 <div class="tiny">
-                  This is your official permission slip to stop being responsible for one night.
-                  I’ll handle the rest. 😌
+                  You’ve been working your ass off and I wanted you to have something fun on the calendar.
+                  Raleigh. May 12. You + me + loud music.
                 </div>
-                <button class="revealBtn" id="revealBtn">Reveal tickets ✨</button>
-                <div class="tiny" style="opacity:0.8;">
-                  (If you want: I can add a “press for a kiss” audio button here too.)
+
+                <div class="btnrow">
+                  <button class="btn primary" id="confettiAgain">More hearts</button>
+                  <button class="btn" id="replay">Replay envelopes</button>
+                </div>
+
+                <div class="tiny" style="opacity:0.85;">
+                  Love you (in a fun, flirty, not-scary way).
                 </div>
               </div>
             </div>
           </div>
-
-          <div class="btnrow" style="margin-top:14px;">
-            <button data-prev="3">← Replay the suspense</button>
-          </div>
-          <div class="hint">love, Paris</div>
         </div>
 
+        <div class="hint" style="margin-top:14px;">Tip: This works beautifully on GitHub Pages.</div>
       </div>
     </div>
   </div>
 
   <div class="signature">love, Paris</div>
 
+  <!-- Letter Modal -->
+  <div class="modalOverlay" id="modalOverlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-label="Letter">
+      <div class="modalTop">
+        <strong>To Anis 💚</strong>
+        <button class="close" id="closeModal">Close</button>
+      </div>
+      <div class="modalBody" id="letterText"></div>
+    </div>
+  </div>
+
   <script>
-    // Panels navigation
-    const dots = [null, document.getElementById("d1"), document.getElementById("d2"), document.getElementById("d3"), document.getElementById("d4")];
-    const panels = {
-      1: document.getElementById("p1"),
-      2: document.getElementById("p2"),
-      3: document.getElementById("p3"),
-      4: document.getElementById("p4"),
-    };
+    // === EDIT YOUR LETTER HERE ===
+    // Keep it heartfelt + flirty. You can paste a longer letter too.
+    const LETTER = `Anis,
 
-    function show(n){
-      Object.values(panels).forEach(p => p.classList.remove("show"));
-      panels[n].classList.add("show");
-      for(let i=1;i<=4;i++){
-        dots[i].classList.toggle("on", i<=n);
-      }
-      window.scrollTo({top:0, behavior:"smooth"});
-    }
+I know things have been intense — and I’m proud of you in the way that’s quiet but very real.
 
-    document.querySelectorAll("button[data-next]").forEach(btn=>{
-      btn.addEventListener("click", ()=> show(Number(btn.dataset.next)));
-    });
-    document.querySelectorAll("button[data-prev]").forEach(btn=>{
-      btn.addEventListener("click", ()=> show(Number(btn.dataset.prev)));
-    });
+I just want you to remember: you don’t have to earn rest. You don’t have to be perfect to be loved.
+You’re already enough.
 
-    // Ticket reveal + confetti
-    const revealBtn = document.getElementById("revealBtn");
+Also… you’re cute. And I miss you.
+So I planned something for us. :)
+
+Love,
+Paris`;
+
+    // Elements
+    const env1 = document.getElementById("env1");
+    const env2 = document.getElementById("env2");
+    const openLetterBtn = document.getElementById("openLetter");
+    const openTicketsBtn = document.getElementById("openTickets");
+    const hint2 = document.getElementById("hint2");
+
+    const modalOverlay = document.getElementById("modalOverlay");
+    const closeModal = document.getElementById("closeModal");
+    const letterText = document.getElementById("letterText");
+
+    const ticketArea = document.getElementById("ticketArea");
     const confetti = document.getElementById("confetti");
-    const ticketBody = document.getElementById("ticketBody");
-    const ticketLocked = document.getElementById("ticketLocked");
-    const ticketHint = document.getElementById("ticketHint");
 
-    function fireConfetti(){
-      confetti.classList.add("show");
-      // add a few random pieces
-      for(let i=0;i<18;i++){
-        const el = document.createElement("i");
-        const left = Math.random()*100;
-        const x = (Math.random()*600 - 300) + "px";
-        const r = (Math.random()*420 - 210) + "deg";
-        el.style.left = left + "%";
-        el.style.setProperty("--x", x);
-        el.style.setProperty("--r", r);
-        confetti.appendChild(el);
-        setTimeout(()=> el.remove(), 1900);
-      }
-      setTimeout(()=> confetti.classList.remove("show"), 1700);
-    }
-
-    revealBtn.addEventListener("click", ()=>{
-      ticketLocked.classList.add("hidden");
-      ticketBody.classList.remove("hidden");
-      ticketHint.textContent = "If you want the real tickets here: add ticket images as files in this folder (see button below).";
-      fireConfetti();
-    });
-
-    // Ticket image cycling (add as many as you want)
-    const TICKETS = ["ticket1.jpg", "ticket2.jpg"]; // <- add/remove filenames here
+    // Ticket images you upload alongside index.html
+    const TICKETS = ["ticket1.jpg", "ticket2.jpg"]; // add more if you want
     let tIndex = 0;
     const ticketPic = document.getElementById("ticketPic");
+    const ticketPlaceholder = document.getElementById("ticketPlaceholder");
+    const ticketHint = document.getElementById("ticketHint");
+
+    // Modal open/close
+    function openModal(){
+      letterText.textContent = LETTER;
+      modalOverlay.classList.add("show");
+      modalOverlay.setAttribute("aria-hidden","false");
+    }
+    function closeModalFn(){
+      modalOverlay.classList.remove("show");
+      modalOverlay.setAttribute("aria-hidden","true");
+    }
+
+    // Confetti hearts
+    function heartConfetti(){
+      confetti.innerHTML = "";
+      confetti.classList.add("show");
+      const hearts = ["💗","💖","💞","💘","💓","💚","💜"];
+      for(let i=0;i<32;i++){
+        const s = document.createElement("span");
+        s.textContent = hearts[Math.floor(Math.random()*hearts.length)];
+        const left = Math.random()*100;
+        const x = (Math.random()*700 - 350) + "px";
+        const r = (Math.random()*520 - 260) + "deg";
+        const delay = (Math.random()*220) + "ms";
+        const size = 14 + Math.floor(Math.random()*16);
+        s.style.left = left + "%";
+        s.style.setProperty("--x", x);
+        s.style.setProperty("--r", r);
+        s.style.animationDelay = delay;
+        s.style.fontSize = size + "px";
+        confetti.appendChild(s);
+        setTimeout(()=> s.remove(), 2100);
+      }
+      setTimeout(()=> confetti.classList.remove("show"), 1900);
+    }
+
+    // Enable tickets button after letter opened
+    let letterOpened = false;
+
+    openLetterBtn.addEventListener("click", ()=>{
+      env1.classList.add("open");
+      openModal();
+      // unlock second envelope
+      letterOpened = true;
+      openTicketsBtn.disabled = false;
+      openTicketsBtn.textContent = "Open envelope";
+      openTicketsBtn.style.opacity = "1";
+      openTicketsBtn.style.cursor = "pointer";
+      hint2.textContent = "Okayyy now you can open it 😌";
+    });
+
+    closeModal.addEventListener("click", closeModalFn);
+    modalOverlay.addEventListener("click", (e)=>{
+      if(e.target === modalOverlay) closeModalFn();
+    });
+
+    // Tickets reveal
+    function showTickets(){
+      env2.classList.add("open");
+      ticketArea.classList.add("show");
+      heartConfetti();
+      // attempt to load first ticket image (if it exists)
+      tryLoadTicket(0);
+      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+    }
+
+    openTicketsBtn.addEventListener("click", ()=>{
+      if(!letterOpened) return;
+      showTickets();
+    });
+
+    function tryLoadTicket(idx){
+      if(!TICKETS.length) return;
+      const src = TICKETS[idx];
+      // try load image; if missing, keep placeholder
+      const img = new Image();
+      img.onload = ()=>{
+        ticketPic.src = src;
+        ticketPic.style.display = "block";
+        ticketPlaceholder.style.display = "none";
+        ticketHint.textContent = `Showing: ${src}`;
+      };
+      img.onerror = ()=>{
+        ticketPic.style.display = "none";
+        ticketPlaceholder.style.display = "block";
+        ticketHint.textContent = `Couldn’t find ${src}. Make sure it’s uploaded next to index.html.`;
+      };
+      img.src = src;
+    }
 
     document.getElementById("nextTicket").addEventListener("click", ()=>{
       if(!TICKETS.length) return;
       tIndex = (tIndex + 1) % TICKETS.length;
-      ticketPic.src = TICKETS[tIndex];
-      ticketHint.textContent = `Showing: ${TICKETS[tIndex]}`;
+      tryLoadTicket(tIndex);
     });
 
-    document.getElementById("downloadHint").addEventListener("click", ()=>{
+    document.getElementById("howTo").addEventListener("click", ()=>{
       ticketHint.textContent =
-        "How to add tickets: (1) Take a screenshot of each ticket / QR code. " +
-        "(2) Save as ticket1.jpg, ticket2.jpg (or .png). " +
-        "(3) Put them in the SAME folder as index.html. " +
-        "(4) Update the TICKETS list in the code if you use different names.";
+        "How to add tickets: screenshot each ticket/QR → save as ticket1.jpg, ticket2.jpg (or .png) → upload them to the repo in the same folder as index.html.";
+    });
+
+    document.getElementById("confettiAgain").addEventListener("click", heartConfetti);
+
+    document.getElementById("replay").addEventListener("click", ()=>{
+      // reset visuals
+      env1.classList.remove("open");
+      env2.classList.remove("open");
+      ticketArea.classList.remove("show");
+      closeModalFn();
+      // keep unlocked once opened (optional). If you want to re-lock, set letterOpened=false and disable button.
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
   </script>
 </body>
